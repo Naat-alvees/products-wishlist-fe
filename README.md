@@ -1,4 +1,4 @@
-# desafio-front
+# project-front
 
 ## Project setup
 ```
