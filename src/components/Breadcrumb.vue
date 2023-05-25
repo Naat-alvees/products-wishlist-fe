@@ -2,7 +2,10 @@
   <nav class="breadcrumb">
     <ul class="breadcrumb-list">
       <li v-for="(route, index) in routes" :key="index">
-        <router-link class="breadcrumb-item" :to="route.path">{{ route.name }}</router-link>
+        <router-link v-if="route.path != null" class="breadcrumb-item" :to="route.path">{{
+          route.name
+        }}</router-link>
+        <span v-if="route.path == null" class="breadcrumb-item">{{ route.name }}</span>
         <span v-if="index < routes.length - 1" class="breadcrumb-separator"> > </span>
       </li>
     </ul>
@@ -14,10 +17,7 @@ export default {
   name: 'Breadcrumb',
   computed: {
     routes() {
-      return this.$route.matched.map(route => ({
-        path: route.path,
-        name: route.name
-      }))
+      return this.$route.meta.breadcrumb
     }
   }
 }

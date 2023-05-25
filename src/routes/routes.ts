@@ -6,11 +6,16 @@ export const routes = [
     path: '/',
     component: HomePage,
     name: 'Home',
-    children: []
+    meta: {
+      breadcrumb: [{ name: 'Home' }]
+    }
   },
   {
     path: '/wish-list',
     component: WishList,
-    name: 'Lista de Desejos'
+    name: 'Lista de Desejos',
+    meta: {
+      breadcrumb: [{ name: 'Home', path: '/' }, { name: 'Lista de Desejos' }]
+    }
   }
 ]

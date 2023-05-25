@@ -30,8 +30,9 @@ export default {
 
 <style>
 .product-list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 200px);
+  grid-gap: 12px;
   justify-content: space-between;
 }
 </style>
