@@ -44,7 +44,7 @@ export default createStore<State>({
   },
   actions: {
     loadItems({ commit }: any) {
-      axios.get('https://run.mocky.io/v3/66063904-d43c-49ed-9329-d69ad44b885e').then(response => {
+      axios.get('http://localhost:3000/products').then(response => {
         commit('setProducts', response.data.products)
       })
     }

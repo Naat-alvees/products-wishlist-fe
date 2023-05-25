@@ -48,11 +48,9 @@ export default {
       this.activeWishList = !this.activeWishList
     },
     addWishList() {
-      console.log('add')
       this.$store.commit('addWishList', this.product)
     },
     removeWishList() {
-      console.log('remove')
       this.$store.commit('removeWishList', this.product.id)
     }
   }
