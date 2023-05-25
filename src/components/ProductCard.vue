@@ -11,31 +11,36 @@
       <span class="remove-icon">x</span>
     </button>
     <div class="container-product">
-      <img
-        class="container-product-image"
-        src="https://picsum.photos/id/237/150/150"
-        alt="Imagem"
-      />
-      <p class="container-product-name">{{ product.name }}</p>
-      <p class="container-product-price">R$ 12</p>
+      <img class="container-product-image" :src="product.image" alt="Imagem" />
+      <p class="container-product-name">{{ product.title }}</p>
+      <p class="container-product-price">R$ {{ product.price }}</p>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'ProductCard',
   props: {
     product: {
-      // type: Object as PropType<object>,
       required: true
+    },
+    isWishList: {
+      required: false
     }
   },
   data() {
     return {
-      activeWishList: true,
-      isWishList: false
+      activeWishList: false
     }
+  },
+  computed: {
+    ...mapGetters(['isInWishList'])
+  },
+  mounted() {
+    this.activeWishList = this.isInWishList(this.product.id)
   },
   methods: {
     handleEventWishList() {
@@ -44,9 +49,11 @@ export default {
     },
     addWishList() {
       console.log('add')
+      this.$store.commit('addWishList', this.product)
     },
     removeWishList() {
       console.log('remove')
+      this.$store.commit('removeWishList', this.product.id)
     }
   }
 }
@@ -122,9 +129,11 @@ export default {
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
+  text-align: center;
 }
 
 .container-product-name {
+  width: 150px;
   font-weight: bolder;
 }
 

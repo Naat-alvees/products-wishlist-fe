@@ -1,9 +1,17 @@
 <template>
-  <h1>aqui é a lista de desejos</h1>
+  <ListProduct :listProduct="wishList" :isWishList="true" />
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
+import ListProduct from '../containers/ListProduct.vue'
+
 export default {
-  name: 'WishList'
+  name: 'WishList',
+  components: {
+    ListProduct
+  },
+  computed: mapState(['wishList'])
 }
 </script>

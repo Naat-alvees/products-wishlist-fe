@@ -1,46 +1,52 @@
+import { ShortProduct } from '@/types/types'
+import axios from 'axios'
 import { createStore } from 'vuex'
 
-interface Product {
-  id: number
-  price: number
-  name: string
-  image: string
-}
-
 interface State {
-  products: Product[]
+  products: ShortProduct[]
+  wishList: ShortProduct[]
   searchFilter: string
 }
 
 export default createStore<State>({
   state: {
-    products: [
-      { id: 1, name: 'Produto 1', price: 19.99, image: 'https://via.placeholder.com/200x200' },
-      { id: 2, name: 'Produto 2', price: 29.99, image: 'https://via.placeholder.com/200x200' },
-      { id: 3, name: 'Produto 3', price: 39.99, image: 'https://via.placeholder.com/200x200' },
-      { id: 4, name: 'Produto 4', price: 49.99, image: 'https://via.placeholder.com/200x200' },
-      { id: 5, name: 'Produto 5', price: 59.99, image: 'https://via.placeholder.com/200x200' },
-      { id: 6, name: 'Produto 6', price: 69.99, image: 'https://via.placeholder.com/200x200' },
-      { id: 7, name: 'Produto 7', price: 79.99, image: 'https://via.placeholder.com/200x200' },
-      { id: 8, name: 'Produto 8', price: 89.99, image: 'https://via.placeholder.com/200x200' }
-    ],
+    products: [],
+    wishList: [],
     searchFilter: ''
   },
 
   getters: {
-    productsFiltereds(state) {
-      const newArr = state.products.filter((product: Product) =>
-        product.name.toLowerCase().includes(state.searchFilter.toLowerCase())
+    productsFiltereds(state: State) {
+      const newArr = state.products.filter((product: ShortProduct) =>
+        product.title.toLowerCase().includes(state.searchFilter.toLowerCase())
       )
 
       return newArr.length ? newArr : state.products
+    },
+    isInWishList: (state: State) => (idProduct: number) => {
+      const index = state.wishList.findIndex(product => product.id === idProduct)
+      return index !== -1
     }
   },
   mutations: {
-    setSearchFilter(state, filter: string) {
+    setSearchFilter(state: State, filter: string) {
       state.searchFilter = filter
+    },
+    setProducts(state, items: ShortProduct[]) {
+      state.products = items
+    },
+    addWishList(state, produc: ShortProduct) {
+      state.wishList.push(produc)
+    },
+    removeWishList(state, idProduct: number) {
+      state.wishList = state.wishList.filter(product => product.id !== idProduct)
     }
   },
-  actions: {},
-  modules: {}
+  actions: {
+    loadItems({ commit }: any) {
+      axios.get('https://run.mocky.io/v3/66063904-d43c-49ed-9329-d69ad44b885e').then(response => {
+        commit('setProducts', response.data.products)
+      })
+    }
+  }
 })
