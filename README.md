@@ -1,5 +1,5 @@
 <h1>
-   project-front
+   products-wishlist-bff
 </h1>
 
 ---
