@@ -70,6 +70,7 @@ export default {
   font-size: 1.5rem;
   color: white;
   text-decoration: none;
+  font-weight: bold;
 }
 
 .actions {

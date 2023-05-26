@@ -11,7 +11,7 @@
       <span class="remove-icon">x</span>
     </button>
     <div class="container-product">
-      <img class="container-product-image" :src="product.image" alt="Imagem" />
+      <img class="container-product-image" :src="product.image" :alt="product.title" />
       <p class="container-product-name">{{ product.title }}</p>
       <p class="container-product-price">R$ {{ product.price }}</p>
     </div>
@@ -72,7 +72,7 @@ export default {
   position: absolute;
   padding: 4px 0px;
   top: -3px;
-  left: 8px;
+  left: 4px;
   width: 24px;
   height: 24px;
   background-color: black;
