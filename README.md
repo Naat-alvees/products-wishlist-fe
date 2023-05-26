@@ -1,5 +1,5 @@
 <h1>
-   products-wishlist-bff
+   products-wishlist-fe
 </h1>
 
 ---
