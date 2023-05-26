@@ -3,6 +3,8 @@ import axios from 'axios'
 import { createStore } from 'vuex'
 
 interface State {
+  loadingProducts: boolean
+  loadingWishList: boolean
   products: ShortProduct[]
   wishList: ShortProduct[]
   searchFilter: string
@@ -10,6 +12,8 @@ interface State {
 
 export default createStore<State>({
   state: {
+    loadingProducts: false,
+    loadingWishList: false,
     products: [],
     wishList: [],
     searchFilter: ''
@@ -43,10 +47,11 @@ export default createStore<State>({
     }
   },
   actions: {
-    loadItems({ commit }: any) {
-      axios.get('http://localhost:3000/products').then(response => {
-        commit('setProducts', response.data.products)
-      })
+    async loadItems({ commit }: any) {
+      this.state.loadingProducts = true
+      const response = await axios.get('http://localhost:3000/products')
+      this.state.loadingProducts = false
+      commit('setProducts', response.data.products)
     }
   }
 })
