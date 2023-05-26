@@ -53,6 +53,9 @@ Contém todos os tipos que são usados no projeto.
 
 ## 🚀 Instalação e comandos úteis
 
+>⚠️ **Atenção:** O projeto busca dados de um BFF. Certifique-se que o BFF está em execução antes de iniciar o projeto.
+> [Repositório do BFF](https://github.com/Naat-alvees/products-wishlist-bff)
+
 ## Project setup
 ```
 npm install
